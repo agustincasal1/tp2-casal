@@ -1,0 +1,478 @@
+[
+  {
+    "viaje_id": " v001 ",
+    "inicio": "2026-09-01 07:40:00",
+    "fin": "2026-09-01 07:55:00",
+    "origen": "CENTRO",
+    "destino": "RETIRO"
+  },
+  {
+    "viaje_id": "V002",
+    "inicio": "2026-09-01 09:15:00",
+    "fin": "2026-09-01 09:37:00",
+    "origen": " parque ",
+    "destino": "CENTRO"
+  },
+  {
+    "viaje_id": "V003",
+    "inicio": " 2026-09-01 11:43:00 ",
+    "fin": "2026-09-01 12:25:00",
+    "origen": "CENTRO",
+    "destino": "PLAZA"
+  },
+  {
+    "viaje_id": "V004",
+    "inicio": "2026-09-01 13:27:00",
+    "fin": "2026-09-01 13:37:00",
+    "origen": "CENTRO",
+    "destino": "CENTRO"
+  },
+  {
+    "viaje_id": "V005",
+    "inicio": "2026-09-01 15:13:00",
+    "fin": "2026-09-01 15:35:00",
+    "origen": "PLAZA",
+    "destino": "PLAZA"
+  },
+  {
+    "viaje_id": "V006",
+    "inicio": "2026-09-01 17:01:00",
+    "fin": "2026-09-01 17:44:00",
+    "origen": "PARQUE",
+    "destino": "PLAZA"
+  },
+  {
+    "viaje_id": "V007",
+    "inicio": "2026-09-02 07:26:00",
+    "fin": "2026-09-02 07:48:00",
+    "origen": "FACULTAD",
+    "destino": "PLAZA"
+  },
+  {
+    "viaje_id": "V008",
+    "inicio": "2026-09-02 09:17:00",
+    "fin": "2026-09-02 09:25:00",
+    "origen": "PARQUE",
+    "destino": "FACULTAD"
+  },
+  {
+    "viaje_id": "V009",
+    "inicio": "2026-09-02 11:21:00",
+    "fin": "2026-09-02 11:46:00",
+    "origen": "PARQUE",
+    "destino": "PARQUE"
+  },
+  {
+    "viaje_id": "V010",
+    "inicio": "2026-09-02 13:48:00",
+    "fin": "2026-09-02 14:17:00",
+    "origen": "CENTRO",
+    "destino": "CENTRO"
+  },
+  {
+    "viaje_id": "V011",
+    "inicio": "2026-09-02 15:24:00",
+    "fin": "2026-09-02 15:38:00",
+    "origen": "RETIRO",
+    "destino": "RETIRO"
+  },
+  {
+    "viaje_id": "V012",
+    "inicio": "2026-09-02 17:38:00",
+    "fin": "2026-09-02 18:02:00",
+    "origen": "CENTRO",
+    "destino": "FACULTAD"
+  },
+  {
+    "viaje_id": "V013",
+    "inicio": "2026-09-03 07:34:00",
+    "fin": "2026-09-03 07:49:00",
+    "origen": "FACULTAD",
+    "destino": "CENTRO"
+  },
+  {
+    "viaje_id": "V014",
+    "inicio": "2026-09-03 09:35:00",
+    "fin": "2026-09-03 10:01:00",
+    "origen": "PLAZA",
+    "destino": "RETIRO"
+  },
+  {
+    "viaje_id": "V015",
+    "inicio": "2026-09-03 11:36:00",
+    "fin": "2026-09-03 11:56:00",
+    "origen": "CENTRO",
+    "destino": "CENTRO"
+  },
+  {
+    "viaje_id": "V016",
+    "inicio": "2026-09-03 13:42:00",
+    "fin": "2026-09-03 14:04:00",
+    "origen": "RETIRO",
+    "destino": "CENTRO"
+  },
+  {
+    "viaje_id": "V017",
+    "inicio": "2026-09-03 15:54:00",
+    "fin": "2026-09-03 16:16:00",
+    "origen": "CENTRO",
+    "destino": "FACULTAD"
+  },
+  {
+    "viaje_id": "V018",
+    "inicio": "2026-09-03 17:17:00",
+    "fin": "2026-09-03 17:54:00",
+    "origen": "RETIRO",
+    "destino": "PARQUE"
+  },
+  {
+    "viaje_id": "V019",
+    "inicio": "2026-09-04 07:23:00",
+    "fin": "2026-09-04 07:53:00",
+    "origen": "PARQUE",
+    "destino": "RETIRO"
+  },
+  {
+    "viaje_id": "V020",
+    "inicio": "2026-09-04 09:44:00",
+    "fin": "2026-09-04 09:56:00",
+    "origen": "PLAZA",
+    "destino": "PARQUE"
+  },
+  {
+    "viaje_id": "V021",
+    "inicio": "2026-09-04 11:34:00",
+    "fin": "2026-09-04 11:57:00",
+    "origen": "PARQUE",
+    "destino": "FACULTAD"
+  },
+  {
+    "viaje_id": "V022",
+    "inicio": "2026-09-04 13:24:00",
+    "fin": "2026-09-04 13:49:00",
+    "origen": "PLAZA",
+    "destino": "PARQUE"
+  },
+  {
+    "viaje_id": "V023",
+    "inicio": "2026-09-04 15:43:00",
+    "fin": "2026-09-04 16:11:00",
+    "origen": "CENTRO",
+    "destino": "PARQUE"
+  },
+  {
+    "viaje_id": "V024",
+    "inicio": "2026-09-04 17:52:00",
+    "fin": "2026-09-04 18:02:00",
+    "origen": "RETIRO",
+    "destino": "FACULTAD"
+  },
+  {
+    "viaje_id": "V025",
+    "inicio": "2026-09-05 07:17:00",
+    "fin": "2026-09-05 07:29:00",
+    "origen": "PARQUE",
+    "destino": "PLAZA"
+  },
+  {
+    "viaje_id": "V026",
+    "inicio": "2026-09-05 09:56:00",
+    "fin": "2026-09-05 10:24:00",
+    "origen": "PARQUE",
+    "destino": "FACULTAD"
+  },
+  {
+    "viaje_id": "V027",
+    "inicio": "2026-09-05 11:25:00",
+    "fin": "2026-09-05 12:02:00",
+    "origen": "PARQUE",
+    "destino": "RETIRO"
+  },
+  {
+    "viaje_id": "V028",
+    "inicio": "2026-09-05 13:08:00",
+    "fin": "2026-09-05 13:31:00",
+    "origen": "PLAZA",
+    "destino": "PLAZA"
+  },
+  {
+    "viaje_id": "V029",
+    "inicio": "2026-09-05 15:16:00",
+    "fin": "2026-09-05 16:01:00",
+    "origen": "FACULTAD",
+    "destino": "PLAZA"
+  },
+  {
+    "viaje_id": "V030",
+    "inicio": "2026-09-05 17:25:00",
+    "fin": "2026-09-05 17:56:00",
+    "origen": "PARQUE",
+    "destino": "PARQUE"
+  },
+  {
+    "viaje_id": "V031",
+    "inicio": "2026-09-06 07:32:00",
+    "fin": "2026-09-06 08:11:00",
+    "origen": "CENTRO",
+    "destino": "CENTRO"
+  },
+  {
+    "viaje_id": "V032",
+    "inicio": "2026-09-06 09:55:00",
+    "fin": "2026-09-06 10:10:00",
+    "origen": "PARQUE",
+    "destino": "PARQUE"
+  },
+  {
+    "viaje_id": "V033",
+    "inicio": "2026-09-06 11:50:00",
+    "fin": "2026-09-06 12:25:00",
+    "origen": "PLAZA",
+    "destino": "CENTRO"
+  },
+  {
+    "viaje_id": "V034",
+    "inicio": "2026-09-06 13:24:00",
+    "fin": "2026-09-06 13:56:00",
+    "origen": "PLAZA",
+    "destino": "FACULTAD"
+  },
+  {
+    "viaje_id": "V035",
+    "inicio": "2026-09-06 15:33:00",
+    "fin": "2026-09-06 15:57:00",
+    "origen": "PLAZA",
+    "destino": "CENTRO"
+  },
+  {
+    "viaje_id": "V036",
+    "inicio": "2026-09-06 17:43:00",
+    "fin": "2026-09-06 17:58:00",
+    "origen": "PLAZA",
+    "destino": "RETIRO"
+  },
+  {
+    "viaje_id": "V037",
+    "inicio": "2026-09-07 07:49:00",
+    "fin": "2026-09-07 08:18:00",
+    "origen": "CENTRO",
+    "destino": "RETIRO"
+  },
+  {
+    "viaje_id": "V038",
+    "inicio": "2026-09-07 09:27:00",
+    "fin": "2026-09-07 09:45:00",
+    "origen": "FACULTAD",
+    "destino": "CENTRO"
+  },
+  {
+    "viaje_id": "V039",
+    "inicio": "2026-09-07 11:46:00",
+    "fin": "2026-09-07 12:10:00",
+    "origen": "PLAZA",
+    "destino": "PARQUE"
+  },
+  {
+    "viaje_id": "V040",
+    "inicio": "2026-09-07 13:32:00",
+    "fin": "2026-09-07 13:46:00",
+    "origen": "RETIRO",
+    "destino": "PLAZA"
+  },
+  {
+    "viaje_id": "V041",
+    "inicio": "2026-09-07 15:38:00",
+    "fin": "2026-09-07 15:58:00",
+    "origen": "PARQUE",
+    "destino": "RETIRO"
+  },
+  {
+    "viaje_id": "V042",
+    "inicio": "2026-09-07 17:48:00",
+    "fin": "2026-09-07 18:06:00",
+    "origen": "PLAZA",
+    "destino": "PLAZA"
+  },
+  {
+    "viaje_id": "V043",
+    "inicio": "2026-09-08 07:58:00",
+    "fin": "2026-09-08 08:06:00",
+    "origen": "PLAZA",
+    "destino": "RETIRO"
+  },
+  {
+    "viaje_id": "V044",
+    "inicio": "2026-09-08 09:31:00",
+    "fin": "2026-09-08 09:40:00",
+    "origen": "CENTRO",
+    "destino": "RETIRO"
+  },
+  {
+    "viaje_id": "V045",
+    "inicio": "2026-09-08 11:56:00",
+    "fin": "2026-09-08 12:23:00",
+    "origen": "PARQUE",
+    "destino": "CENTRO"
+  },
+  {
+    "viaje_id": "V046",
+    "inicio": "2026-09-08 13:15:00",
+    "fin": "2026-09-08 13:59:00",
+    "origen": "CENTRO",
+    "destino": "CENTRO"
+  },
+  {
+    "viaje_id": "V047",
+    "inicio": "2026-09-08 15:46:00",
+    "fin": "2026-09-08 16:25:00",
+    "origen": "CENTRO",
+    "destino": "PLAZA"
+  },
+  {
+    "viaje_id": "V048",
+    "inicio": "2026-09-08 17:49:00",
+    "fin": "2026-09-08 18:05:00",
+    "origen": "PARQUE",
+    "destino": "FACULTAD"
+  },
+  {
+    "viaje_id": "V049",
+    "inicio": "2026-09-09 07:35:00",
+    "fin": "2026-09-09 07:53:00",
+    "origen": "RETIRO",
+    "destino": "PLAZA"
+  },
+  {
+    "viaje_id": "V050",
+    "inicio": "2026-09-09 09:55:00",
+    "fin": "2026-09-09 10:30:00",
+    "origen": "PARQUE",
+    "destino": "PLAZA"
+  },
+  {
+    "viaje_id": "V051",
+    "inicio": "2026-09-09 11:48:00",
+    "fin": "2026-09-09 12:08:00",
+    "origen": "RETIRO",
+    "destino": "FACULTAD"
+  },
+  {
+    "viaje_id": "V052",
+    "inicio": "2026-09-09 13:42:00",
+    "fin": "2026-09-09 14:13:00",
+    "origen": "FACULTAD",
+    "destino": "PLAZA"
+  },
+  {
+    "viaje_id": "V053",
+    "inicio": "2026-09-09 15:28:00",
+    "fin": "2026-09-09 15:43:00",
+    "origen": "PARQUE",
+    "destino": "PARQUE"
+  },
+  {
+    "viaje_id": "V054",
+    "inicio": "2026-09-09 17:04:00",
+    "fin": "2026-09-09 17:33:00",
+    "origen": "CENTRO",
+    "destino": "PLAZA"
+  },
+  {
+    "viaje_id": "V055",
+    "inicio": "2026-09-10 07:35:00",
+    "fin": "2026-09-10 07:57:00",
+    "origen": "PLAZA",
+    "destino": "PARQUE"
+  },
+  {
+    "viaje_id": "V056",
+    "inicio": "2026-09-10 09:00:00",
+    "fin": "2026-09-10 09:12:00",
+    "origen": "CENTRO",
+    "destino": "PARQUE"
+  },
+  {
+    "viaje_id": "V057",
+    "inicio": "2026-09-10 11:04:00",
+    "fin": "2026-09-10 11:14:00",
+    "origen": "RETIRO",
+    "destino": "CENTRO"
+  },
+  {
+    "viaje_id": "V058",
+    "inicio": "2026-09-10 13:32:00",
+    "fin": "2026-09-10 13:55:00",
+    "origen": "RETIRO",
+    "destino": "FACULTAD"
+  },
+  {
+    "viaje_id": "V059",
+    "inicio": "2026-09-10 15:13:00",
+    "fin": "2026-09-10 15:55:00",
+    "origen": "PARQUE",
+    "destino": "PLAZA"
+  },
+  {
+    "viaje_id": "V060",
+    "inicio": "2026-09-10 17:36:00",
+    "fin": "2026-09-10 18:14:00",
+    "origen": "PARQUE",
+    "destino": "FACULTAD"
+  },
+  {
+    "viaje_id": "V004",
+    "inicio": "2026-09-01 13:27:00",
+    "fin": "2026-09-01 13:37:00",
+    "origen": "CENTRO",
+    "destino": "CENTRO"
+  },
+  {
+    "viaje_id": "viaje-61",
+    "inicio": "2026-09-01 13:27:00",
+    "fin": "2026-09-01 13:37:00",
+    "origen": "CENTRO",
+    "destino": "CENTRO"
+  },
+  {
+    "viaje_id": "V062",
+    "inicio": "2026-02-30 10:00:00",
+    "fin": "2026-09-01 13:37:00",
+    "origen": "CENTRO",
+    "destino": "CENTRO"
+  },
+  {
+    "viaje_id": "V063",
+    "inicio": "2026-09-01 13:27:00",
+    "fin": "2026-08-31 08:00:00",
+    "origen": "CENTRO",
+    "destino": "CENTRO"
+  },
+  {
+    "viaje_id": "V064",
+    "inicio": "2026-09-01 13:27:00",
+    "fin": "2026-09-01 13:37:00",
+    "origen": "",
+    "destino": "CENTRO"
+  },
+  {
+    "viaje_id": "V065",
+    "inicio": "2026-09-01 13:27:00",
+    "fin": "2026-09-01 13:37:00",
+    "origen": "CENTRO",
+    "destino": "ESTACION_INEXISTENTE"
+  },
+  {
+    "viaje_id": "V066",
+    "inicio": "2026-09-01 13:27:00",
+    "fin": "",
+    "origen": "CENTRO",
+    "destino": "CENTRO"
+  },
+  {
+    "viaje_id": "V067",
+    "inicio": "2026-09-01 13:27:00",
+    "fin": "2026-09-01 13:27:00",
+    "origen": "CENTRO",
+    "destino": "CENTRO"
+  }
+]
