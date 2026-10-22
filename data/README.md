@@ -54,8 +54,10 @@ Se agregan ocho filas para verificar el tratamiento de errores:
 | 67 | Fin faltante |
 | 68 | Fin igual al inicio |
 
-Las filas 1, 2 y 3 contienen espacios o minúsculas recuperables. Se espera
-registrar esas tres correcciones, aceptar 60 viajes y rechazar ocho.
+Las filas 1, 2 y 3 contienen espacios o minúsculas recuperables. La fila 62
+también pasa a mayúsculas, pero sigue teniendo un identificador inválido.
+Se espera registrar cuatro cambios de campos, aceptar 60 viajes y rechazar
+ocho. Una normalización no garantiza que la fila termine siendo válida.
 
 ## Limitaciones
 
