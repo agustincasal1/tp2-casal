@@ -1,7 +1,10 @@
 """Validación y transformación de los registros de viajes."""
 
+import csv
 import re
 from datetime import datetime
+
+from .modelo import BalanceEstacion
 
 CAMPOS = ("viaje_id", "inicio", "fin", "origen", "destino")
 ESTACIONES = ("CENTRO", "FACULTAD", "PARQUE", "PLAZA", "RETIRO")
@@ -91,3 +94,48 @@ def limpiar_viajes(registros):
         registro["fin"] = convertir_fecha(registro["fin"])
         validos.append(registro)
     return validos, rechazos, correcciones
+
+
+def seleccionar_periodo(viajes, desde=None, hasta=None):
+    """Selecciona por fecha de inicio, incluyendo ambos días del intervalo."""
+    if desde is not None and hasta is not None and desde > hasta:
+        raise ValueError("La fecha desde no puede ser posterior a hasta.")
+    return [
+        viaje for viaje in viajes
+        if (desde is None or viaje["inicio"].date() >= desde)
+        and (hasta is None or viaje["inicio"].date() <= hasta)
+    ]
+
+
+def generar_balance(viajes):
+    """Cuenta ambos extremos de cada viaje, incluso si vuelve al mismo lugar."""
+    estaciones = {nombre: BalanceEstacion(nombre) for nombre in ESTACIONES}
+    for viaje in viajes:
+        estaciones[viaje["origen"]].registrar_salida()
+        estaciones[viaje["destino"]].registrar_llegada()
+    return [estacion.como_diccionario() for estacion in estaciones.values()]
+
+
+def verificar_balance(reporte, cantidad_viajes):
+    """Controla conservación de movimientos y coherencia de cada estación."""
+    if [fila["estacion"] for fila in reporte] != list(ESTACIONES):
+        raise ValueError("El reporte no contiene las estaciones esperadas.")
+    for fila in reporte:
+        if fila["salidas"] < 0 or fila["llegadas"] < 0:
+            raise ValueError("El reporte tiene cantidades negativas.")
+        if fila["balance"] != fila["llegadas"] - fila["salidas"]:
+            raise ValueError("El balance de una estación es incorrecto.")
+    salidas = sum(fila["salidas"] for fila in reporte)
+    llegadas = sum(fila["llegadas"] for fila in reporte)
+    if salidas != cantidad_viajes or llegadas != cantidad_viajes:
+        raise ValueError("El reporte no conserva la cantidad de viajes.")
+    if sum(fila["balance"] for fila in reporte) != 0:
+        raise ValueError("La suma de los balances debe ser cero.")
+
+
+def guardar_csv(filas, ruta, campos):
+    """Escribe el encabezado incluso cuando no hay filas."""
+    with open(ruta, "w", encoding="utf-8", newline="") as archivo:
+        escritor = csv.DictWriter(archivo, fieldnames=campos)
+        escritor.writeheader()
+        escritor.writerows(filas)
