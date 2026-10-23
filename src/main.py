@@ -48,12 +48,14 @@ def ejecutar(ruta, carpeta_salida, desde=None, hasta=None):
     carpeta = Path(carpeta_salida)
     nombres_salida = ("reporte.csv", "rechazos.csv", "correcciones.csv",
                       "seleccionados.csv", "resumen.json")
-    if ruta.resolve() in [(carpeta / nombre).resolve() for nombre in nombres_salida]:
-        raise ValueError("La carpeta de salida sobrescribiría el archivo de entrada.")
+    rutas_salida = [(carpeta / nombre).resolve() for nombre in nombres_salida]
+    if ruta.resolve() in rutas_salida:
+        raise ValueError("La salida sobrescribiría el archivo de entrada.")
     carpeta.mkdir(parents=True, exist_ok=True)
     guardar_csv(reporte, carpeta / "reporte.csv",
                 ("estacion", "salidas", "llegadas", "balance"))
-    guardar_csv(rechazos, carpeta / "rechazos.csv", ("fila", *CAMPOS, "motivo"))
+    guardar_csv(rechazos, carpeta / "rechazos.csv",
+                ("fila", *CAMPOS, "motivo"))
     guardar_csv(correcciones, carpeta / "correcciones.csv",
                 ("fila", "campo", "original", "normalizado"))
     guardar_csv(seleccionados, carpeta / "seleccionados.csv", CAMPOS)
@@ -64,14 +66,25 @@ def ejecutar(ruta, carpeta_salida, desde=None, hasta=None):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Reporte de movimientos de bicicletas.")
+    parser = argparse.ArgumentParser(
+        description="Reporte de movimientos de bicicletas."
+    )
     parser.add_argument("archivo", help="Archivo de viajes CSV o JSON")
-    parser.add_argument("--desde", type=fecha_argumento, help="Primer día, AAAA-MM-DD")
-    parser.add_argument("--hasta", type=fecha_argumento, help="Último día, AAAA-MM-DD")
-    parser.add_argument("--salida", default="outputs", help="Carpeta de resultados")
+    parser.add_argument("--desde", type=fecha_argumento,
+                        help="Primer día, AAAA-MM-DD")
+    parser.add_argument("--hasta", type=fecha_argumento,
+                        help="Último día, AAAA-MM-DD")
+    parser.add_argument("--salida", default="outputs",
+                        help="Carpeta de resultados")
     args = parser.parse_args()
     try:
-        reporte, resumen = ejecutar(args.archivo, args.salida, args.desde, args.hasta)
+        reporte, resumen = ejecutar(
+            args.archivo, args.salida, args.desde, args.hasta
+        )
+    except UnicodeDecodeError:
+        print("Error: el archivo debe estar guardado con codificación UTF-8.",
+              file=sys.stderr)
+        return 1
     except (OSError, ValueError, csv.Error) as error:
         print(f"Error: {error}", file=sys.stderr)
         return 1
@@ -85,7 +98,8 @@ def main():
               f"{fila['llegadas']:8} {fila['balance']:8}")
     print(f"Archivos guardados en: {args.salida}")
     if resumen["validos"] == 0:
-        print("No quedaron viajes válidos. Revisá rechazos.csv.", file=sys.stderr)
+        print("No quedaron viajes válidos. Revisá rechazos.csv.",
+              file=sys.stderr)
         return 1
     if resumen["seleccionados"] == 0:
         print("No hay viajes en el período elegido.")

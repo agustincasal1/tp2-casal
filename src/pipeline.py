@@ -18,11 +18,11 @@ PATRON_ID = re.compile(r"V[0-9]{3}")
 def convertir_fecha(texto):
     """Comprueba formato y calendario antes de devolver un datetime."""
     if not isinstance(texto, str) or not PATRON_FECHA.fullmatch(texto):
-        raise ValueError("Se espera una fecha con formato AAAA-MM-DD HH:MM:SS.")
+        raise ValueError("Formato esperado: AAAA-MM-DD HH:MM:SS.")
     try:
         return datetime.strptime(texto, FORMATO_FECHA)
     except ValueError as error:
-        raise ValueError("La fecha u hora no existe en el calendario.") from error
+        raise ValueError("La fecha u hora no existe.") from error
 
 
 def validar_esquema(registros):
@@ -37,7 +37,7 @@ def validar_esquema(registros):
 
 
 def normalizar_registro(registro):
-    """Crea una copia con espacios exteriores quitados y códigos en mayúsculas."""
+    """Quita espacios exteriores y unifica códigos en una copia."""
     limpio = {}
     for campo, valor in registro.items():
         if isinstance(valor, str):
@@ -80,11 +80,12 @@ def limpiar_viajes(registros):
             if original[campo] != registro[campo]:
                 correcciones.append({
                     "fila": fila, "campo": campo,
-                    "original": original[campo], "normalizado": registro[campo],
+                    "original": original[campo],
+                    "normalizado": registro[campo],
                 })
         motivos = validar_recorrido(registro)
         if not motivos and registro["viaje_id"] in aceptados:
-            motivos.append("viaje_id duplicado: se conserva el primero válido")
+            motivos.append("viaje_id duplicado: se conserva el primer válido")
         if motivos:
             rechazos.append({"fila": fila, **original,
                              "motivo": "; ".join(motivos)})
@@ -108,7 +109,7 @@ def seleccionar_periodo(viajes, desde=None, hasta=None):
 
 
 def generar_balance(viajes):
-    """Cuenta ambos extremos de cada viaje, incluso si vuelve al mismo lugar."""
+    """Cuenta ambos extremos, incluso si el viaje vuelve al mismo lugar."""
     estaciones = {nombre: BalanceEstacion(nombre) for nombre in ESTACIONES}
     for viaje in viajes:
         estaciones[viaje["origen"]].registrar_salida()

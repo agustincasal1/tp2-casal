@@ -30,7 +30,13 @@ class FuenteCSV(FuenteDatos):
 class FuenteJSON(FuenteDatos):
     def cargar(self, ruta):
         with open(ruta, encoding="utf-8-sig") as archivo:
-            registros = json.load(archivo)
+            try:
+                registros = json.load(archivo)
+            except json.JSONDecodeError as error:
+                raise ValueError(
+                    f"JSON inválido: revisar línea {error.lineno}, "
+                    f"columna {error.colno}."
+                ) from error
         if not isinstance(registros, list) or not all(
             isinstance(registro, dict) for registro in registros
         ):

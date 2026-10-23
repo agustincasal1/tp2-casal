@@ -1,67 +1,63 @@
-# Datos de práctica
+# Datos de los viajes
 
-La muestra es **simulada**, no proviene de Ecobici ni describe su operación real.
-Se preparó para este TP el 23/10/2026. Responsable: Agustín Casal.
-No hay una URL de descarga ni una fecha de consulta externa: el procedimiento
-de obtención está en `generar_datos.py`.
+La muestra se generó para este TP el 23/10/2026. Responsable: Agustín Casal.
+La fuente es el script `generar_datos.py`; no se descargó de un sitio externo
+ni corresponde a viajes reales de Ecobici. Se permite usarla y modificarla
+con fines educativos citando este repositorio.
 
-Condiciones de uso: se permite usar y modificar esta muestra con fines
-educativos, citando este repositorio. No contiene personas ni ubicaciones reales
-de estaciones. Los nombres de estaciones son etiquetas ficticias.
+## Variables y formato
 
-## Unidad de análisis y variables
+Cada fila representa un viaje. `viajes.csv` y `viajes.json` contienen los mismos
+68 registros en el mismo orden: son dos formatos de una sola muestra.
 
-Cada fila representa un viaje de una estación a otra. CSV y JSON contienen los
-mismos 68 registros, en el mismo orden; son alternativas de entrada y no deben
-sumarse como si fueran dos muestras diferentes.
-
-| Campo | Tipo de entrada | Significado |
+| Campo | Tipo | Descripción |
 | --- | --- | --- |
-| `viaje_id` | texto | Identificador `V` seguido de tres dígitos ASCII |
-| `inicio` | texto | Inicio local, `AAAA-MM-DD HH:MM:SS` |
-| `fin` | texto | Fin local, con el mismo formato y posterior al inicio |
-| `origen` | texto | Estación de salida |
-| `destino` | texto | Estación de llegada |
+| `viaje_id` | Texto | V seguida de tres dígitos ASCII |
+| `inicio` | Texto | Inicio local, `AAAA-MM-DD HH:MM:SS` |
+| `fin` | Texto | Fin con el mismo formato, posterior al inicio |
+| `origen` | Texto | Estación de salida |
+| `destino` | Texto | Estación de llegada |
 
-Estaciones admitidas: CENTRO, PARQUE, RETIRO, FACULTAD y PLAZA.
-Los horarios se interpretan como hora local de Buenos Aires, sin conversiones
-de zona horaria. El archivo CSV tiene encabezado y separador coma; el JSON es
-una lista de objetos con estos cinco campos. Ambos usan UTF-8.
+Las estaciones ficticias son CENTRO, PARQUE, RETIRO, FACULTAD y PLAZA.
+Se usa hora local de Buenos Aires, sin conversiones de zona horaria.
+Ambos archivos tienen codificación UTF-8. El CSV usa coma como separador y
+encabezado; el JSON es una lista de objetos con los cinco campos.
 
-## Cómo repetir la generación
+## Generación
 
-Desde la raíz del proyecto:
+Los archivos ya están incluidos. Para regenerarlos desde `tp2-casal`:
 
 ```bash
 python data/generar_datos.py
 ```
 
-El script utiliza `random.Random(42)` para generar 60 viajes del 1 al 10 de
+El script usa `random.Random(42)` para crear 60 viajes entre el 1 y el 10 de
 septiembre de 2026, seis por día, con duraciones de 8 a 45 minutos. Origen y
-destino se eligen de forma independiente; se admiten regresos a la misma
-estación. No es necesario generar de nuevo los archivos para usar la aplicación.
+destino se eligen de forma independiente; un viaje puede volver a la misma
+estación. Con la misma semilla se reproduce la muestra.
 
-Se agregan ocho filas para verificar el tratamiento de errores:
+Se agregan ocho registros para comprobar los rechazos. La numeración empieza
+en 1 y no cuenta el encabezado CSV:
 
-| Registro (sin encabezado) | Error esperado |
+| Fila | Problema |
 | --- | --- |
-| 61 | Repetición del identificador V004 |
+| 61 | Identificador V004 repetido |
 | 62 | Identificador con formato incorrecto |
-| 63 | Fecha que no existe en el calendario |
+| 63 | Fecha que no existe |
 | 64 | Fin anterior al inicio |
 | 65 | Origen faltante |
 | 66 | Destino desconocido |
 | 67 | Fin faltante |
 | 68 | Fin igual al inicio |
 
-Las filas 1, 2 y 3 contienen espacios o minúsculas recuperables. La fila 62
-también pasa a mayúsculas, pero sigue teniendo un identificador inválido.
-Se espera registrar cuatro cambios de campos, aceptar 60 viajes y rechazar
-ocho. Una normalización no garantiza que la fila termine siendo válida.
+Las filas 1, 2 y 3 tienen espacios o minúsculas que se corrigen. La fila 62
+también pasa a mayúsculas, pero su identificador sigue siendo inválido.
+El resultado esperado es 60 viajes válidos, ocho rechazos y cuatro cambios
+de campos registrados.
 
 ## Limitaciones
 
-La frecuencia de seis viajes diarios fue elegida para simplificar la muestra.
-No modela demanda, estaciones cercanas, capacidad, clima ni hábitos de personas.
-Los conteos sirven para comprobar el programa, no para recomendar cambios en
-una red real. No hay inventario inicial ni viajes de reposición.
+No hay datos personales. Los nombres de las estaciones son ficticios y la
+frecuencia de seis viajes diarios fue elegida para simplificar la muestra.
+No se modelan demanda, distancias, clima, capacidad ni reposiciones; los datos
+sirven para comprobar el funcionamiento del programa.

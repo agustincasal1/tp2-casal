@@ -4,7 +4,7 @@ from datetime import datetime
 from pathlib import Path
 
 from src.fuentes import FuenteCSV, FuenteJSON
-from src.pipeline import convertir_fecha, limpiar_viajes
+from src.pipeline import convertir_fecha, limpiar_viajes, normalizar_registro
 
 RAIZ = Path(__file__).resolve().parents[1]
 VIAJE = {
@@ -71,6 +71,68 @@ class TestLimpieza(unittest.TestCase):
             with self.subTest(registros=registros):
                 with self.assertRaises(ValueError):
                     limpiar_viajes(registros)
+
+    def test_normalizar_dos_veces_da_el_mismo_resultado(self):
+        original = dict(VIAJE, viaje_id=" v001 ", destino=" parque ")
+        primera = normalizar_registro(original)
+        self.assertEqual(normalizar_registro(primera), primera)
+        self.assertEqual(original["destino"], " parque ")
+
+    def test_registra_varios_problemas_de_una_misma_fila(self):
+        original = dict(VIAJE, viaje_id="mal", origen="", fin="")
+        validos, rechazos, _ = limpiar_viajes([original])
+        self.assertEqual(validos, [])
+        self.assertEqual(len(rechazos), 1)
+        for campo in ("viaje_id", "origen", "fin"):
+            self.assertIn(campo, rechazos[0]["motivo"])
+        self.assertEqual(rechazos[0]["viaje_id"], "mal")
+
+    def test_esquema_incompleto_en_la_segunda_fila(self):
+        incompleto = dict(VIAJE)
+        del incompleto["fin"]
+        with self.assertRaisesRegex(ValueError, "Registro 2"):
+            limpiar_viajes([VIAJE, incompleto])
+
+    def test_esquema_con_columna_desconocida(self):
+        with self.assertRaisesRegex(ValueError, "exactamente los campos"):
+            limpiar_viajes([dict(VIAJE, duracion=20)])
+
+    def test_registro_que_no_es_diccionario(self):
+        with self.assertRaisesRegex(ValueError, "Registro 1"):
+            limpiar_viajes([["V001", "CENTRO", "PARQUE"]])
+
+    def test_fecha_numerica_no_se_interpreta_como_texto(self):
+        validos, rechazos, _ = limpiar_viajes([dict(VIAJE, inicio=20260901)])
+        self.assertEqual(validos, [])
+        self.assertIn("inicio", rechazos[0]["motivo"])
+
+    def test_identificador_con_ceros_iniciales_se_conserva(self):
+        validos, rechazos, _ = limpiar_viajes([dict(VIAJE, viaje_id="V007")])
+        self.assertEqual(validos[0]["viaje_id"], "V007")
+        self.assertEqual(rechazos, [])
+
+    def test_misma_ruta_con_ids_distintos_son_dos_viajes(self):
+        validos, rechazos, _ = limpiar_viajes([
+            VIAJE, dict(VIAJE, viaje_id="V002"),
+        ])
+        self.assertEqual([v["viaje_id"] for v in validos], ["V001", "V002"])
+        self.assertEqual(rechazos, [])
+
+    def test_conserva_correcciones_de_una_fila_rechazada(self):
+        validos, rechazos, cambios = limpiar_viajes([
+            dict(VIAJE, origen=" otra "),
+        ])
+        self.assertEqual(validos, [])
+        self.assertEqual(rechazos[0]["origen"], " otra ")
+        self.assertEqual(cambios, [{
+            "fila": 1, "campo": "origen", "original": " otra ",
+            "normalizado": "OTRA",
+        }])
+
+    def test_datos_correctos_no_generan_correcciones(self):
+        validos, rechazos, cambios = limpiar_viajes([VIAJE])
+        self.assertEqual(len(validos), 1)
+        self.assertEqual((rechazos, cambios), ([], []))
 
 
 if __name__ == "__main__":

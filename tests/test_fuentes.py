@@ -1,5 +1,6 @@
 """Verificaciones de lectura, independientes del tema de los datos."""
 
+import csv
 import tempfile
 import unittest
 from pathlib import Path
@@ -15,7 +16,7 @@ class TestFuentes(unittest.TestCase):
 
     def escribir(self, nombre, texto):
         ruta = self.carpeta / nombre
-        ruta.write_text(texto, encoding="utf-8")
+        ruta.write_text(texto, encoding="utf-8", newline="\n")
         return ruta
 
     def test_lecturas_equivalentes(self):
@@ -48,6 +49,45 @@ class TestFuentes(unittest.TestCase):
                 ruta = self.escribir("mal.csv", texto)
                 with self.assertRaises(ValueError):
                     FuenteCSV().cargar(ruta)
+
+    def test_csv_con_marca_bom(self):
+        ruta = self.escribir("bom.csv", "\ufeffcodigo,valor\nV001,10\n")
+        self.assertEqual(FuenteCSV().cargar(ruta),
+                         [{"codigo": "V001", "valor": "10"}])
+
+    def test_json_con_marca_bom(self):
+        ruta = self.escribir("bom.json", '\ufeff[{"codigo": "V001"}]')
+        self.assertEqual(FuenteJSON().cargar(ruta), [{"codigo": "V001"}])
+
+    def test_csv_respeta_comas_entre_comillas(self):
+        ruta = self.escribir("comas.csv", 'nombre,valor\n"Plaza, sur",5\n')
+        self.assertEqual(FuenteCSV().cargar(ruta),
+                         [{"nombre": "Plaza, sur", "valor": "5"}])
+
+    def test_csv_respeta_saltos_dentro_de_un_campo(self):
+        ruta = self.escribir("saltos.csv", 'nota,codigo\n"dos\nlineas",A\n')
+        registros = FuenteCSV().cargar(ruta)
+        self.assertEqual(len(registros), 1)
+        self.assertEqual(registros[0]["nota"], "dos\nlineas")
+
+    def test_csv_no_inventa_el_valor_de_una_celda_ausente(self):
+        ruta = self.escribir("corto.csv", "codigo,valor\nV001\n")
+        self.assertEqual(FuenteCSV().cargar(ruta),
+                         [{"codigo": "V001", "valor": None}])
+
+    def test_csv_solo_encabezado_no_crea_registros(self):
+        ruta = self.escribir("vacio.csv", "codigo,valor\n")
+        self.assertEqual(FuenteCSV().cargar(ruta), [])
+
+    def test_csv_con_comillas_sin_cerrar_informa_error(self):
+        ruta = self.escribir("comillas.csv", 'codigo,valor\n"V001,10\n')
+        with self.assertRaises(csv.Error):
+            FuenteCSV().cargar(ruta)
+
+    def test_json_conserva_caracteres_en_utf8(self):
+        ruta = self.escribir("texto.json", '[{"nombre": "Estación Ñandú"}]')
+        self.assertEqual(FuenteJSON().cargar(ruta),
+                         [{"nombre": "Estación Ñandú"}])
 
 
 if __name__ == "__main__":
